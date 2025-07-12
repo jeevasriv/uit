@@ -1,0 +1,144 @@
+import React, { useState } from 'react';
+import fabricImage10 from './fabric-21.jpg';
+import fabricImage2 from './fabric-22.jpg';
+import fabricImage3 from './fabric-24.jpg';
+import fabricImage4 from './fabric-25.jpg';
+import fabricImage5 from './fabric-30.jpg';
+import fabricImage6 from './fabric-31.jpg';
+import fabricImage7 from './fabric-32.jpg';
+import fabricImage8 from './fabric-34.jpg';
+import fabricImage9 from './fabric-35.jpg';
+
+
+function Product() {
+  const [hoveredCard, setHoveredCard] = useState(null); // For tracking hover state on each card
+
+  const styles = {
+    container: {
+      fontFamily: 'Arial, sans-serif',
+      padding: '20px',
+      backgroundColor: '#f9f9f9',
+    },
+    heading: {
+      textAlign: 'center',
+      fontSize: '2rem',
+      color: '#2c3e50',
+      marginBottom: '30px',
+    },
+    grid: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: '20px',
+      justifyContent: 'center',
+    },
+    card: {
+      backgroundColor: '#fff',
+      border: '1px solid #ddd',
+      borderRadius: '8px',
+      padding: '12px',
+      width: '200px',
+      textAlign: 'center',
+      boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+      transition: 'transform 0.3s, box-shadow 0.3s',
+    },
+    hoveredCard: {
+      transform: 'scale(1.05)',
+      boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
+    },
+    image: {
+      width: '100%',
+      height: '180px',
+      objectFit: 'cover',
+      borderRadius: '4px',
+      marginBottom: '10px',
+    },
+    title: {
+      fontSize: '1rem',
+      fontWeight: 'bold',
+      marginBottom: '6px',
+      color: '#333',
+    },
+    price: {
+      fontSize: '1.1rem',
+      color: '#B12704',
+      fontWeight: 'bold',
+    },
+    offer: {
+      fontSize: '0.9rem',
+      color: '#007600',
+    },
+    button: {
+      marginTop: '10px',
+      padding: '8px 16px',
+      backgroundColor: '#f39c12',
+      color: 'white',
+      border: 'none',
+      borderRadius: '4px',
+      cursor: 'pointer',
+      fontSize: '1rem',
+    },
+    buttonHover: {
+      backgroundColor: '#e67e22',
+    }
+  };
+
+  // A separate list of your custom image file paths
+  const productImages = [
+    fabricImage10,
+fabricImage2,
+fabricImage3,
+fabricImage4,
+fabricImage5,
+fabricImage6,
+fabricImage7,
+fabricImage8,
+fabricImage9,
+
+  ];
+
+  const products = Array.from({ length: 9 }, (_, i) => ({
+    id: i + 1,
+    title: `Fabric Item ${i + 1}`,
+    image: productImages[i], // Assigning custom local image for each product
+    price: `₹${(i + 1) * 100}`,
+    offer: `${10 + (i % 5) * 5}% off`,
+  }));
+
+  return (
+    <div style={styles.container}>
+      <h1 style={styles.heading}>Printed SilkFabric Collection</h1>
+      <div style={styles.grid}>
+        {products.map((product) => (
+          <div
+            key={product.id}
+            style={{
+              ...styles.card,
+              ...(hoveredCard === product.id ? styles.hoveredCard : {}),
+            }}
+            onMouseEnter={() => setHoveredCard(product.id)} // Set hover state on enter
+            onMouseLeave={() => setHoveredCard(null)} // Remove hover state on leave
+          >
+            <img
+            src={product.image}
+            alt={product.title}
+            style={styles.image}
+/>
+
+            <div style={styles.title}>{product.title}</div>
+            <div style={styles.price}>{product.price}</div>
+            <div style={styles.offer}>{product.offer}</div>
+            <button
+              style={styles.button}
+              onMouseOver={(e) => (e.target.style.backgroundColor = '#e67e22')}
+              onMouseOut={(e) => (e.target.style.backgroundColor = '#f39c12')}
+            >
+              Add to Cart
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default Product;
