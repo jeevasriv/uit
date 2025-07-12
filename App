@@ -1,0 +1,81 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Home from './Home';
+import About from './About';
+import Product from './Product';
+import Contact from './Contact';
+
+function App() {
+    const navStyle = {
+        backgroundColor: 'green',
+        padding: '10px 20px',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    };
+
+    const navRightStyle = {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '20px',
+    };
+
+    const ulStyle = {
+        listStyle: 'none',
+        display: 'flex',
+        margin: 0,
+        padding: 0,
+        gap: '20px',
+    };
+
+    const liStyle = {
+        fontSize: '16px',
+        fontWeight: '500',
+    };
+
+    const linkStyle = {
+        color: 'white',
+        textDecoration: 'none',
+    };
+
+    const signupButtonStyle = {
+        color: 'blue',
+        textDecoration: 'none',
+        fontWeight: 'bold',
+        padding: '8px 16px',
+        backgroundColor: 'white',
+        border: '1px solid rgb(53, 255, 107)',
+        borderRadius: '45px',
+        cursor: 'pointer',
+    };
+
+    return (
+        <Router>
+            <div>
+                <nav style={navStyle}>
+                    {/* Left side: (Optional logo or brand) */}
+                    <h2 style={{ color: 'white', margin: 0 }}>Fabric Fashion</h2>
+                    {/* Right side: Links + Sign up */}
+                    <div style={navRightStyle}>
+                        <ul style={ulStyle}>
+                            <li style={liStyle}><Link to="/" style={linkStyle}>Home</Link></li>
+                            <li style={liStyle}><Link to="/about" style={linkStyle}>Printed Silk Fabric</Link></li>
+                            <li style={liStyle}><Link to="/product" style={linkStyle}>Cotton Linen Fabric</Link></li>
+                        </ul>
+                        <Link to="/contact" style={signupButtonStyle}>Sign up</Link>
+                    </div>
+                </nav>
+
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/product" element={<Product />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="*" element={<h2 style={{ textAlign: 'center', marginTop: '2rem' }}>404 - Page Not Found</h2>} />
+                </Routes>
+            </div>
+        </Router>
+    );
+}
+
+export default App;
